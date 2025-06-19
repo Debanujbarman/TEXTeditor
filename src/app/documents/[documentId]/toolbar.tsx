@@ -110,7 +110,14 @@ const FontSizeButton = () => {
                 <MinusIcon className="size-4"/>
              </button>
              {isEditing ?(
-                <input/>
+                <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                onBlur={handelInputBlur}
+                onKeyDown={handleKeyDown}
+                className="h-7 w-16 text-center border border-neutral-400 rounded-sm bg-transparent focus:outline-none focus:ring-0 "
+                />
              ):(
                 <button
                 onClick={() =>{
@@ -120,7 +127,7 @@ const FontSizeButton = () => {
                 className=" h-7 w-7 text-sm  text-center border border-neutral-400 rounded-sm hover:bg-neutral-200/80"
 
                 >
-
+                {currentFontSize}
                 </button>
              )
             }
