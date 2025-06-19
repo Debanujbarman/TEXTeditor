@@ -27,7 +27,8 @@ import{
     RemoveFormattingIcon,
     ChevronDownIcon,
     HighlighterIcon,
-    MinusIcon
+    MinusIcon,
+    PlusIcon
     } from "lucide-react";
 
 
@@ -116,7 +117,7 @@ const FontSizeButton = () => {
                 onChange={handleInputChange}
                 onBlur={handelInputBlur}
                 onKeyDown={handleKeyDown}
-                className="h-7 w-16 text-center border border-neutral-400 rounded-sm bg-transparent focus:outline-none focus:ring-0 "
+                className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm bg-transparent focus:outline-none focus:ring-0 "
                 />
              ):(
                 <button
@@ -124,13 +125,17 @@ const FontSizeButton = () => {
                     setIsEditing(true);
                     setFontSize(currentFontSize);
                 }}
-                className=" h-7 w-7 text-sm  text-center border border-neutral-400 rounded-sm hover:bg-neutral-200/80"
-
-                >
+                className=" h-7 w-10 text-sm  text-center border border-neutral-400 rounded-sm bg-transparent cursor-text"
+               >
                 {currentFontSize}
                 </button>
-             )
-            }
+             )}
+             <button
+         onClick={increment}
+             className=" h-7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80"
+             >
+                <PlusIcon className="size-4"/>
+             </button>
           </div>
     );
 } 
