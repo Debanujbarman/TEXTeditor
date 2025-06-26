@@ -2,8 +2,8 @@
 
 
 import { ReactNode } from "react";
-import{ClerkProvider, useAuth, SignIn} from "@clerk/clerk-react";
 import{ConvexProviderWithClerk} from "convex/react-clerk";
+import{ClerkProvider, useAuth, SignIn} from "@clerk/nextjs";
 import {  ConvexReactClient, Authenticated, Unauthenticated, AuthLoading } from "convex/react";
 
 import { FullscreenLoader } from "./fullscreen-loader";
@@ -24,7 +24,7 @@ export function ConvexClientProvider({ children }: { children: ReactNode }) {
         </Authenticated>
         <Unauthenticated>
         <div className="flex flex-col items-center justify-center h-screen">
-            <SignIn/>
+            <SignIn routing="hash"/>
             </div>
         </Unauthenticated>
         <AuthLoading>

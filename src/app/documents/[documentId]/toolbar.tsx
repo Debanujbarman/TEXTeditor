@@ -56,7 +56,7 @@ const FontSizeButton = () => {
     const { editor } = useEditorStore();
      
      const currentFontSize= editor?.getAttributes("textStyle").fontSize
-     ? editor?.getAttributes("testStyle").fontSize.replace("px","")
+     ? editor?.getAttributes("textStyle").fontSize.replace("px","")
      :"16";
 
      const[fontSize,setFontSize]= useState(currentFontSize);
@@ -66,7 +66,7 @@ const FontSizeButton = () => {
      const updateFontSize=(newSize:string)=>{
         const size= parseInt(newSize);
         if(!isNaN(size)&& size>0){
-            editor?.chain().focus().setFontSize(`${size}.px`).run();
+            editor?.chain().focus().setFontSize(`${size}px`).run();
             setFontSize(newSize);
             setInputValue(newSize);
             setIsEditing(false);
@@ -91,12 +91,12 @@ const FontSizeButton = () => {
      };
 
      const increment =() =>{
-        const newSize= parseInt(fontSize) +1;
+        const newSize= parseInt(fontSize) + 1;
         updateFontSize(newSize.toString());
      }
 
      const decrement =() =>{
-        const newSize= parseInt(fontSize) -1;
+        const newSize= parseInt(fontSize) - 1;
         if(newSize>0){
             updateFontSize(newSize.toString());
         }
@@ -638,7 +638,7 @@ export const Toolbar = () => {
             <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             <HeadingLevelButton/>
             <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
-            {/*TODO: Font Size*/} 
+            <FontSizeButton/>
             <Separator orientation="vertical" className="h-6 bg-neutral-300"/>
             {section[1].map((item) => (
                 <ToolbarButton 
@@ -652,7 +652,7 @@ export const Toolbar = () => {
             < LinkButton/>
             <ImageButton/>
             <AlignButton/>
-           <FontSizeButton/>
+           
             <ListButton/>
             {section[2].map((item) => (
                 <ToolbarButton 

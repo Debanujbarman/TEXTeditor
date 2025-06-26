@@ -10,6 +10,7 @@ import { Color } from '@tiptap/extension-color'
 import  Highlight from "@tiptap/extension-highlight"
 import FontFamily from '@tiptap/extension-font-family'
 import TextStyle from '@tiptap/extension-text-style'
+// import FontSize from "@/extensions/font-size";
 import Underline  from '@tiptap/extension-underline'
 import ImageResize from 'tiptap-extension-resize-image'
 import TableCell from '@tiptap/extension-table-cell'
@@ -72,6 +73,7 @@ export const Editor =()=>{
               }),
             FontFamily,
             TextStyle,
+            // FontSize,
             Underline,
             Table,
             Image,
