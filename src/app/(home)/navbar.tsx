@@ -13,7 +13,8 @@ export const Navbar = () => {
                 <h3 className="text-xl">TEXTeditor</h3>
             </div>
             <SearchInput/>
-            <UserButton/>
+            <div/>
+            {/* <UserButton/> */}
         </nav>
     );
 };
