@@ -28,7 +28,8 @@ import{
     ChevronDownIcon,
     HighlighterIcon,
     MinusIcon,
-    PlusIcon
+    PlusIcon,
+    ListCollapseIcon
     } from "lucide-react";
 
 
@@ -51,6 +52,47 @@ import{
 } from "@/components/ui/dialog";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
+
+
+const LineHeightButton = () => {
+    const { editor } = useEditorStore();
+
+     const lineHeights=[
+        {label: "Default", value: "normal"},
+        {label: "Single", value: "1.0"},
+        {label: "1.5", value: "1.5"},
+        {label: "Double", value: "2.0"},
+        {label: "1.15", value: "1.15"},
+        {label: "1.25", value: "1.25"},
+        {label: "1.75", value: "1.75"},
+     ]
+    return(
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+            <button
+                    className=" h-7 min-w-7 shrink-0 flex flex-col items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm"
+            >
+               <ListCollapseIcon className="size-4"/>
+             </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+              {lineHeights.map(({label, value})=>(
+                <button
+                key={value}
+                onClick={()=> editor?.chain().focus().setLineHeight(value).run()}
+                className={cn(
+                    "flex items-center gap-x-2 px-2 py-1  rounded-sm hover:bg-neutral-200/80",
+                    editor?.getAttributes("paragraph"). lineHeights=== value && "bg-neutral-200/80"
+                    )}
+                    >
+                    <span className="text-sm">{label}</span>
+                </button>
+              )
+            )}
+            </DropdownMenuContent>
+        </DropdownMenu>
+    );
+}
 
 const FontSizeButton = () => {
     const { editor } = useEditorStore();
@@ -125,7 +167,7 @@ const FontSizeButton = () => {
                     setIsEditing(true);
                     setFontSize(currentFontSize);
                 }}
-                className=" h-7 w-10 text-sm  text-center border border-neutral-400 rounded-sm bg-transparent cursor-text"
+                className=" h-7 w-10 text-sm  text-center border border-neutral-400 rounded-sm hover:bg-neutral-200/80"
                >
                 {currentFontSize}
                 </button>
@@ -153,7 +195,7 @@ const ListButton = () => {
         {
             label:"Ordered List",
             icon: ListOrderedIcon,
-            isActive:() => editor?.isActive("OrderedList"),
+            isActive:() => editor?.isActive("orderedList"),
             onClick:() => editor?.chain().focus().toggleOrderedList().run(),
         }
      ]
@@ -241,7 +283,6 @@ const AlignButton = () => {
                     >
                     <Icon className="size-4"/>
                     <span className="text-sm">{label}</span>
-                    <span>{label}</span>
                 </button>
               )
             )}
@@ -590,7 +631,7 @@ export const Toolbar = () => {
              icon: BoldIcon,
              isActive: editor?.isActive("bold"),
              onClick: () => editor?.chain().focus().toggleBold().run(),
-            },
+          },
             {
                 label: "Italic",
                  icon: ItalicIcon,
@@ -652,7 +693,7 @@ export const Toolbar = () => {
             < LinkButton/>
             <ImageButton/>
             <AlignButton/>
-           
+            <LineHeightButton/>
             <ListButton/>
             {section[2].map((item) => (
                 <ToolbarButton 
