@@ -21,9 +21,9 @@ export const create=mutation({
 });
 
 export const get= query({
-  args:{ paginationnOpts: paginationOptsValidator },
+  args:{ paginationOpts: paginationOptsValidator },
     handler: async (ctx, args) => {
-     return await ctx.db.query("documents").paginate(args.paginationnOpts);
+     return await ctx.db.query("documents").paginate(args.paginationOpts);
       // do something with `tasks`
     },
   });

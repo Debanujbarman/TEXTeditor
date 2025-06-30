@@ -11,6 +11,7 @@ import{
 } from "@/components/ui/table";
 
 import { Doc } from "../../../convex/_generated/dataModel";
+import { DocumentRow } from "./document-row";
 
 interface DocumentsTableProps {
     documents: Doc<"documents">[] | undefined;
@@ -33,11 +34,28 @@ export const DocumentsTable = ({
             <Table>
                 <TableHeader>
                     <TableRow className="hover:bg-transparent border-none">
-                        <TableHead className="w-[50%]">Title</TableHead>
-                        <TableHead className="w-[30%]">Owner</TableHead>
-                        <TableHead className="w-[20%]">Created At</TableHead>
+                        <TableHead>Name</TableHead>
+                        <TableHead>&nbsp;</TableHead>
+                        <TableHead className="hidden md:table-cell">Shared</TableHead>
+                        <TableHead className="hidden md:table-cell">Created at</TableHead>
                     </TableRow>
                 </TableHeader>
+                {documents.length ==0?(
+                  <TableBody>
+                    <TableRow className="hover:bg-transparent">
+                        <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+                          No document found
+                        </TableCell>
+                    </TableRow>
+                  </TableBody>
+                ) :(
+                   <TableBody>
+                     {documents.map((document) => (
+                      <DocumentRow key ={document._id} document={document}/>
+                    ))}
+                   </TableBody>
+
+                )}
             </Table>
          )}
         </div>
