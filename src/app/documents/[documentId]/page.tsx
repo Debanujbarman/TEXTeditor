@@ -1,4 +1,4 @@
-import { Navbar } from "@/app/(home)/navbar";
+import { Navbar } from "./navbar";
 import{Editor} from "./editor"
 import { Toolbar } from "./toolbar";
 

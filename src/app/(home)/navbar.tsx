@@ -14,7 +14,7 @@ export const Navbar = () => {
             </div>
             <SearchInput/>
             <div/>
-            {/* <UserButton/> */}
+            <UserButton/>
         </nav>
     );
 };
