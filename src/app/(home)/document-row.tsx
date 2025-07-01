@@ -1,3 +1,5 @@
+"use client";
+
 import {SiGoogledocs} from "react-icons/si"
 
 import{TableCell, TableRow} from "@/components/ui/table";
@@ -5,6 +7,8 @@ import {format} from "date-fns"
 import {Doc} from "../../../convex/_generated/dataModel";
 import { Building2Icon, CircleUserIcon, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { DocumentMenu } from "./document-menu";
+import { useRouter } from "next/navigation";
 
 
 interface DocumentRowProps{
@@ -12,8 +16,11 @@ interface DocumentRowProps{
 };
 
 export const DocumentRow =({ document}: DocumentRowProps) =>{
+    const router =useRouter();
+
   return(
     <TableRow
+       onClick={() => router.push(`/documents/${document._id}`)}
        className="cursor-pointer"
       >
      <TableCell className="w-[50px]">
@@ -32,10 +39,12 @@ export const DocumentRow =({ document}: DocumentRowProps) =>{
      <TableCell className="text-muted-forground hidden md:table-cell">
         {format(new Date(document._creationTime), "MMM dd, yyy")}
      </TableCell>
-     <TableCell className="flex  justify-end">
-        <Button variant="ghost" size="icon" className="rounded-full">
-            <MoreVertical className="size-4"/>
-        </Button>
+     <TableCell className="flex justify-end">
+        <DocumentMenu
+        documentId={document._id}
+        title={document.title}
+        onNewTab={()=> window.open(`/documents/${document._id}`, "_blank")}
+        />
      </TableCell>
     </TableRow>
   )
