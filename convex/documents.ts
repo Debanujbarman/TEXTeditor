@@ -112,11 +112,9 @@ export const get= query({
     args: {id: v.id("documents"), title:v.string() },
     handler: async (ctx, args)=>{
       const user = await ctx.auth.getUserIdentity();
-
       if(!user){
         throw new ConvexError("Unauthorized");
       }
-
       const organizationId =(user.organization_id ?? undefined) as
         | string
         | undefined;
@@ -137,6 +135,21 @@ export const get= query({
       return await ctx.db.patch(args.id ,{title: args.title});
     },
   });
+  export const updateContent = mutation({
+      args: {
+        id: v.id("documents"),
+        content: v.string(),
+        leftMargin: v.optional(v.number()),
+        rightMargin: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, {
+      initialContent: args.content,
+      leftMargin: args.leftMargin ?? undefined,
+      rightMargin: args.rightMargin ?? undefined,
+    });
+  },
+});
 
 export const getById = query ({
   args: { id: v.id("documents") }, 
@@ -150,3 +163,4 @@ export const getById = query ({
     return document;
   },
 });
+

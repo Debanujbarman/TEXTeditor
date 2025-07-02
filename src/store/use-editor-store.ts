@@ -1,6 +1,7 @@
 import {create } from "zustand";
 import{ type Editor} from "@tiptap/react";
-import { Doc } from "../../convex/_generated/dataModel";
+import { Doc, Id } from "../../convex/_generated/dataModel";
+
 
 // interface EditorState {
 //     editor: Editor | null;
@@ -29,6 +30,7 @@ import { Doc } from "../../convex/_generated/dataModel";
 // }));
 interface EditorState {
   editor: Editor | null;
+   docId: Id<"documents"> | null; 
   setEditor: (editor: Editor | null) => void;
   leftMargin: number;
   rightMargin: number;
@@ -38,6 +40,7 @@ interface EditorState {
 
 export const useEditorStore = create<EditorState>()((set) => ({
   editor: null,
+   docId: null,
   setEditor: (editor) => set({ editor }),
   leftMargin: 56,
   rightMargin: 56,
@@ -46,5 +49,6 @@ export const useEditorStore = create<EditorState>()((set) => ({
     set({
       leftMargin: doc.leftMargin ?? 56,
       rightMargin: doc.rightMargin ?? 56,
+      docId: doc._id, 
     }),
 }));
