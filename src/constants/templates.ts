@@ -17,7 +17,7 @@ export const templates = [
 
     { 
         id:"project-proposal", 
-        label:"Project Development",
+        label:"Project Proposal",
         imageUrl:"/project-proposal.svg"
     },
     { 
