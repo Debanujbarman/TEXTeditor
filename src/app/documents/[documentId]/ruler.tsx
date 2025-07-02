@@ -1,12 +1,16 @@
 import { useRef, useState } from "react";
 import {FaCaretDown} from "react-icons/fa";
+import { useEditorStore } from "@/store/use-editor-store";
+
+import{RIGHT_MARGIN_DEFAULT,LEFT_MARGIN_DEFAULT} from "@/constants/margins"
 
 const markers = Array.from({length: 83}, (_, i) => i);
 
 
 export const Ruler = () => {
-    const [leftMargin , setLeftMargin] =useState(56);
-    const [rightMargin , setRightMargin] =useState(56);
+    // const [leftMargin , setLeftMargin] =useState(LEFT_MARGIN_DEFAULT);
+    // const [rightMargin , setRightMargin] =useState(RIGHT_MARGIN_DEFAULT);
+    const { leftMargin, rightMargin, setMargins } = useEditorStore();
     
     const [isDraggingLeft, setIsDraggingLeft] = useState(false);
     const [isDraggingRight, setIsDraggingRight] = useState(false);
@@ -34,12 +38,12 @@ export const Ruler = () => {
             if (isDraggingLeft){
                 const maxLeftPosition = PAGE_WIDTH - rightMargin - MINIMUM_SPACE
                 const newLeftPosition = Math.min (rawPosition, maxLeftPosition);
-                setLeftMargin(newLeftPosition); //todo : make collaborative
+                setMargins(newLeftPosition,rightMargin); //todo : make collaborative
             } else if (isDraggingRight) {
             const maxRightPosition = PAGE_WIDTH - (leftMargin + MINIMUM_SPACE);
             const newRightPosition = Math.max(PAGE_WIDTH - rawPosition, 0);
             const constrainedRightPosition = Math.min(newRightPosition, maxRightPosition);
-            setRightMargin (constrainedRightPosition);
+            setMargins(leftMargin,constrainedRightPosition);
            }
          }
        }
@@ -51,10 +55,10 @@ export const Ruler = () => {
    };
 
    const handleLeftDoubleClick = () => {
-      setLeftMargin (56);
+      setMargins(LEFT_MARGIN_DEFAULT, rightMargin);
     };
     const handleRightDoubleClick = () =>{
-      setRightMargin(56);
+      setMargins(leftMargin, RIGHT_MARGIN_DEFAULT);
     };
 
 

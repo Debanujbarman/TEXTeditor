@@ -25,10 +25,18 @@ import { FontSizeExtension } from '@/extensions/font-size'
 import { LineHeightExtension } from '@/extensions/line-height';
 import { Ruler } from './ruler';
 
-export const Editor =()=>{
-    const {setEditor} = useEditorStore();
+
+interface EditorProps{
+ initialContent?: string | undefined;
+};
+
+export const Editor =({initialContent}: EditorProps)=>{
+    
+
+    const {setEditor,leftMargin, rightMargin} = useEditorStore();
 
     const editor = useEditor({
+     content: initialContent,
       immediatelyRender: false,
         onCreate ({ editor }) {
            setEditor(editor);
@@ -57,7 +65,7 @@ export const Editor =()=>{
         },
         editorProps: {
             attributes:{
-                style:"padding-left: 56px; padding-right: 56px; ",
+                style:`padding-left: ${leftMargin}px; padding-right: ${rightMargin}px;`,
                 class: "focus:outline-none print:border-0 bg-white border-[#C7C7C7] flex-col min-h-[1054px] w-[816px] pt-10 pr-14 pb-10 cursor-text"
             },
         },

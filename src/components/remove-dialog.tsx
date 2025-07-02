@@ -17,7 +17,7 @@ import{
 } from "@/components/ui/alert-dialog"
 import { Id } from "../../convex/_generated/dataModel";
 import { api } from "../../convex/_generated/api";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 interface RemoveDialogProps {
