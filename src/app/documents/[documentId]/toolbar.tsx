@@ -224,7 +224,6 @@ const ListButton = () => {
                     >
                     <Icon className="size-4"/>
                     <span className="text-sm">{label}</span>
-                    <span>{label}</span>
                 </button>
               )
             )}
